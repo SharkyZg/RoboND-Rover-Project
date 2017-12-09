@@ -141,13 +141,23 @@ def perception_step(Rover):
     Rover.worldmap[y_world_navigable, x_world_navigable, 2] += 1
     Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
 
+    #Check if sample has been sighted
+    # Check whether any rock detections are present in worldmap
+    if rock_x_world.any():
+        Rover.mode = "collect_sample"
+        rover_centric_pixel_distances, rover_centric_angles = to_polar_coords(xpix_rock, ypix_rock) 
+        print("Sample spoted !!")
+    else:
+        Rover.mode = "forward"
+        rover_centric_pixel_distances, rover_centric_angles = to_polar_coords(xpix_navigable, ypix_navigable) 
     # 8) Convert rover-centric pixel positions to polar coordinates
-    rover_centric_pixel_distances, rover_centric_angles = to_polar_coords(
-        xpix_navigable, ypix_navigable)
+
 
     # Update Rover pixel distances and angles
 
     Rover.nav_dists = rover_centric_pixel_distances
     Rover.nav_angles = rover_centric_angles
+
+
 
     return Rover

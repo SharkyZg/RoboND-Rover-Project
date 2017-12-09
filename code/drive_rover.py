@@ -77,6 +77,7 @@ class RoverState():
         self.near_sample = 0 # Will be set to telemetry value data["near_sample"]
         self.picking_up = 0 # Will be set to telemetry value data["picking_up"]
         self.send_pickup = False # Set to True to trigger rock pickup
+        self.count = 0 # Counter that turns robot on every tenth itteration if stuck
 # Initialize our rover 
 Rover = RoverState()
 
